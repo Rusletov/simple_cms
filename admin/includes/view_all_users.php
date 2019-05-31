@@ -7,7 +7,6 @@
                             <th>Last name</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Date</th>
 
                         </tr>
                     </thead>
@@ -30,9 +29,9 @@
     ?>
     
     <tr>
-        <td><?= $comment_id; ?></td>
-        <td><?= $comment_author; ?></td>
-        <td><?= $comment_content; ?></td>
+        <td><?= $user_id; ?></td>
+        <td><?= $username; ?></td>
+        <td><?= $user_firstname; ?></td>
 
 <?php 
 
@@ -48,26 +47,26 @@
 <!--         <td><?= $cat_title; ?></td> -->
 <?php //} ?>        
 
-        <td><?= $comment_email; ?></td>
-        <td><?= $comment_status; ?></td>
+        <td><?= $user_lastname; ?></td>
+        <td><?= $user_email; ?></td>
+        <td><?= $user_role; ?></td>
 
 <?php
-        $query = "SELECT * FROM posts WHERE post_id = {$comment_post_id}";
-        $select_post_id_query = mysqli_query($connection, $query);
-        while ($row = mysqli_fetch_assoc($select_post_id_query)) {
-            $post_id = $row['post_id'];
-            $post_title = $row['post_title'];
+        // $query = "SELECT * FROM posts WHERE post_id = {$comment_post_id}";
+        // $select_post_id_query = mysqli_query($connection, $query);
+        // while ($row = mysqli_fetch_assoc($select_post_id_query)) {
+        //     $post_id = $row['post_id'];
+        //     $post_title = $row['post_title'];
         
 ?>
 
-        <td><a href="../post.php?p_id=<?= $post_id ?>"><?= $post_title; ?></a></td>
+        <!-- <td><a href="../post.php?p_id=<?= $post_id ?>"><?= $post_title; ?></a></td> -->
 
-<?php } ?>
+<?php //} ?>
 
-        <td><?= $comment_date; ?></td>
-        <td><a href='./comments.php?approve=<?= $comment_id ?>'>Approve</a></td>
-        <td><a href='./comments.php?unapprove=<?= $comment_id ?>'>Unapprove</a></td>
-        <td><a href='./comments.php?delete=<?= $comment_id ?>'>Delete</a></td>
+        <td><a href='./comments.php?approve=<?= '' ?>'>Approve</a></td>
+        <td><a href='./comments.php?unapprove=<?= '' ?>'>Unapprove</a></td>
+        <td><a href='./comments.php?delete=<?= '' ?>'>Delete</a></td>
 
     </tr>
     

@@ -1,18 +1,18 @@
 <?php 
 
-if (isset($_POST['create_post'])) {
-	
-	$post_title = s($_POST['title']);
-	$post_author = s($_POST['author']);
-	$post_category_id = s($_POST['post_category']);
-	$post_status = s($_POST['post_status']);
+if (isset($_POST['create_user'])) {
 
-	$post_image = $_FILES['image']['name'];
-	$post_image_temp = $_FILES['image']['tmp_name']; //temporary location of a file
+	$user_firstname = s($_POST['user_firstname']);
+	$user_lastname = s($_POST['user_lastname']);
+	$user_role = s($_POST['user_role']);
 
-	$post_tags = s($_POST['post_tags']);
-	$post_content = s($_POST['post_content']);
-	$post_date = date('d-m-y');
+	// $post_image = $_FILES['image']['name'];
+	// $post_image_temp = $_FILES['image']['tmp_name']; //temporary location of a file
+
+	$username = s($_POST['username']);
+	$user_email = s($_POST['user_email']);
+	$user_password = s($_POST['user_password']);
+	// $post_date = date('d-m-y');
 	$post_comment_count = 0;
 
 	move_uploaded_file($post_image_temp, "../images/$post_image");
@@ -34,59 +34,48 @@ if (isset($_POST['create_post'])) {
 	
 
 	<div class="form-group">
-		<label for="title">Post Title</label>
-		<input type="text" class="form-control" name="title">
-	</div>	
+		<label for="author">First name</label>
+		<input type="text" class="form-control" name="user_firstname">
+	</div>
 
 	<div class="form-group">
-		<select name="post_category" id="post_category">
-		<?php 
+		<label for="post_status">Last Name</label>
+		<input type="text" class="form-control" name="user_lastname">
+	</div>
 
-            $query = "SELECT * FROM categories";
-            $select_categories = mysqli_query($connection, $query);
-
-            confirmQuery($select_categories);
-
-            while ($row = mysqli_fetch_assoc($select_categories)) {
-                $cat_id = $row['cat_id'];
-                $cat_title = $row['cat_title'];
-            
-		 ?>
- 			<option value="<?= $cat_id ?>"><?= $cat_title ?></option>
-
-<?php } ?>
+	<div class="form-group">
+		<select name="user_role" id="user_category">
+			<option value="subscriber">Select option</option>
+			<option value="admin">Admin</option>
+			<option value="subscriber">Subscriber</option>
 
 		</select>
 	</div>
 
 
-	<div class="form-group">
-		<label for="author">Post Author</label>
-		<input type="text" class="form-control" name="author">
-	</div>
 
-	<div class="form-group">
-		<label for="post_status">Post Status</label>
-		<input type="text" class="form-control" name="post_status">
-	</div>
-
-	<div class="form-group">
+<!-- 	<div class="form-group">
 		<label for="image">Post Image</label>
 		<input type="file" name="image">
+	</div> -->
+
+	<div class="form-group">
+		<label for="post_tags">Username</label>
+		<input type="text" class="form-control" name="username">
 	</div>
 
 	<div class="form-group">
-		<label for="post_tags">Post Tags</label>
-		<input type="text" class="form-control" name="post_tags">
+		<label for="post_content">Email</label>
+		<input type="email" class="form-control" name="user_email">
 	</div>
 
 	<div class="form-group">
-		<label for="post_content">Post Content</label>
-		<textarea class="form-control" name="post_content" id="" cols="30" rows="10"></textarea>
+		<label for="post_content">Password</label>
+		<input type="password" class="form-control" name="user_password">
 	</div>
 
 	<div class="form-group">
-		<input type="submit" class="btn btn-primary" name="create_post" value="Publish Post">
+		<input type="submit" class="btn btn-primary" name="create_user" value="Add user">
 	</div>
 
 

@@ -100,6 +100,27 @@
 	</div>
 
 	<div class="form-group">
+		<select name="user_role" id="post_category">
+		<?php 
+
+            $query = "SELECT * FROM users";
+            $select_users = mysqli_query($connection, $query);
+
+            confirmQuery($select_users);
+
+            while ($row = mysqli_fetch_assoc($select_users)) {
+                $user_id = $row['user_role'];
+                $user_role = $row['user_role'];
+            
+		 ?>
+ 			<option value="<?= $user_id ?>"><?= $user_role ?></option>
+
+<?php } ?>
+
+		</select>
+	</div>
+
+	<div class="form-group">
 		<label for="post_status">Post Status</label>
 		<input value="<?= $post_status ?>" type="text" class="form-control" name="post_status">
 	</div>

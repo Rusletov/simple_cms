@@ -64,9 +64,9 @@
 
 <?php //} ?>
 
-        <td><a href='./comments.php?approve=<?= '' ?>'>Approve</a></td>
-        <td><a href='./comments.php?unapprove=<?= '' ?>'>Unapprove</a></td>
-        <td><a href='./comments.php?delete=<?= '' ?>'>Delete</a></td>
+        <td><a href='./users.php?approve=<?= '' ?>'>Approve</a></td>
+        <td><a href='./users.php?unapprove=<?= '' ?>'>Unapprove</a></td>
+        <td><a href='./users.php?delete=<?= '' ?>'>Delete</a></td>
 
     </tr>
     

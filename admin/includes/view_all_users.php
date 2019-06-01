@@ -7,6 +7,9 @@
                             <th>Last name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Approve</th>
+                            <th>Unapprove</th>
+                            <th>Delete</th>
 
                         </tr>
                     </thead>
@@ -66,7 +69,7 @@
 
         <td><a href='./users.php?approve=<?= '' ?>'>Approve</a></td>
         <td><a href='./users.php?unapprove=<?= '' ?>'>Unapprove</a></td>
-        <td><a href='./users.php?delete=<?= '' ?>'>Delete</a></td>
+        <td><a href='./users.php?delete=<?= $user_id ?>'>Delete</a></td>
 
     </tr>
     
@@ -95,11 +98,11 @@
     }
 
     if (isset($_GET['delete'])) {
-        $the_comment_id = $_GET['delete'];
-        $query = "DELETE FROM comments WHERE comment_id = '{$the_comment_id}'";
-        $delete_query = mysqli_query($connection, $query);
-        confirmQuery($delete_query);
-        header("Location: comments.php");
+        $the_user_id = $_GET['delete'];
+        $query = "DELETE FROM users WHERE user_id = '{$the_user_id}'";
+        $delete_user_query = mysqli_query($connection, $query);
+        confirmQuery($delete_user_query);
+        header("Location: users.php");
     }
 
 

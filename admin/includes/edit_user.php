@@ -2,6 +2,19 @@
 
 if (isset($_GET['edit_user'])) {
 	$the_user_id = $_GET['edit_user'];
+
+    $query = "SELECT * FROM users WHERE user_id = {$the_user_id}";
+	$select_users_query = mysqli_query($connection, $query);
+	while ($row = mysqli_fetch_assoc($select_users_query)) {
+	    $user_id = $row['user_id'];
+	    $username = $row['username'];
+	    $user_password = $row['user_password'];
+	    $user_firstname = $row['user_firstname'];
+	    $user_lastname = $row['user_lastname'];
+	    $user_email = $row['user_email'];
+	    $user_image = $row['user_image'];
+	    $user_role = $row['user_role'];
+	}
 }
 
 
@@ -39,12 +52,12 @@ if (isset($_POST['edit_user'])) {
 
 	<div class="form-group">
 		<label for="author">First name</label>
-		<input type="text" class="form-control" name="user_firstname">
+		<input type="text" value="<?= $user_firstname; ?>" class="form-control" name="user_firstname">
 	</div>
 
 	<div class="form-group">
 		<label for="post_status">Last Name</label>
-		<input type="text" class="form-control" name="user_lastname">
+		<input type="text" value="<?= $user_lastname; ?>" class="form-control" name="user_lastname">
 	</div>
 
 	<div class="form-group">
@@ -65,17 +78,17 @@ if (isset($_POST['edit_user'])) {
 
 	<div class="form-group">
 		<label for="post_tags">Username</label>
-		<input type="text" class="form-control" name="username">
+		<input type="text" value="<?= $username; ?>" class="form-control" name="username">
 	</div>
 
 	<div class="form-group">
 		<label for="post_content">Email</label>
-		<input type="email" class="form-control" name="user_email">
+		<input type="email" value="<?= $user_email; ?>" class="form-control" name="user_email">
 	</div>
 
 	<div class="form-group">
 		<label for="post_content">Password</label>
-		<input type="password" class="form-control" name="user_password">
+		<input type="password" value="<?= $user_password; ?>" class="form-control" name="user_password">
 	</div>
 
 	<div class="form-group">

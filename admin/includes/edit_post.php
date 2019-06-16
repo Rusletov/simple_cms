@@ -58,7 +58,11 @@
 
 		confirmQuery($update_post);
 
+?>
 
+<p class="bg-success">Post Updated. <a href="<?= "../post.php?p_id={$the_post_id}" ?>">View Post</a> or <a href="posts.php">Edit more posts</a></p>
+
+<?php
 
     }
 
@@ -101,8 +105,16 @@
 
 	<div class="form-group">
 		<label for="post_status">Post Status</label>
-		<input value="<?= $post_status ?>" type="text" class="form-control" name="post_status">
+		<select class="form-control" name="post_status" id="">
+            <option value="draft" <?php if($post_status == 'draft'){echo "selected";} ?>>Draft</option>
+            <option value="published" <?php if($post_status == 'published'){echo "selected";} ?>>Published</option>
+        </select>
 	</div>
+
+<!-- 	<div class="form-group">
+		<label for="post_status">Post Status</label>
+		<input value="<?= $post_status ?>" type="text" class="form-control" name="post_status">
+	</div> -->
 
 	<div class="form-group">
 		<img width="200" src="../images/<?= $post_image; ?>" alt="image">
@@ -116,7 +128,7 @@
 
 	<div class="form-group">
 		<label for="post_content">Post Content</label>
-		<textarea class="form-control" name="post_content" id="" cols="30" rows="10"><?= $post_content; ?></textarea>
+		<textarea id="body" class="form-control" name="post_content" id="" cols="30" rows="10"><?= $post_content; ?></textarea>
 	</div>
 
 	<div class="form-group">

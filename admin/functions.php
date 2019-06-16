@@ -7,6 +7,13 @@ function confirmQuery($result) {
 	}
 }
 
+function SelectedUserRole($option){
+	global $user_role;
+		if($user_role == $option ){
+		  echo "selected";
+	}
+}
+
 // sql injection escape
 function s($string) {
 	global $connection;

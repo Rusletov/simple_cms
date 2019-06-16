@@ -24,8 +24,14 @@ if (isset($_POST['create_user'])) {
 
 	confirmQuery($create_user_query);
 
-}
 
+	?>
+
+	<p>The user has been created successfully! <a href='users.php'>View Users</a></p>
+
+<?php
+
+}
 
  ?>
 

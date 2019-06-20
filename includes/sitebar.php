@@ -19,6 +19,9 @@
                     <!-- /.input-group -->
                 </div>
 
+<?php if (!isset($_SESSION['user_role'])) { ?>
+    
+
                 <!-- Login -->
                 <div class="well">
                     <h4>Login</h4>
@@ -34,9 +37,27 @@
                         </span>
                     </div>
 
-                    </form><!-- search form -->
+                    </form><!-- login form -->
                     <!-- /.input-group -->
                 </div>
+
+<?php } else { ?>
+
+                            <!-- Logout -->
+                <div class="well">
+                    <h4>Log out</h4>
+                    <form action="includes/logout.php" method="post">
+
+                        <p>Hi <?= $_SESSION['username'] ?>!</p>
+
+                            <button class="btn btn-primary" name="logout" type="submit">Log out</button>
+
+
+                    </form><!-- logout form -->
+                    <!-- /.input-group -->
+                </div>
+
+<?php }?>
 
                 <!-- Blog Categories Well -->
                 <div class="well">

@@ -5,11 +5,11 @@
 
 <?php 
 
-if (!isset($_SESSION['user_role'])) {
+if (!isset($_SESSION['user_role']) && $_SESSION['user_role'] != 'admin') {
 
         header("Location: ../index.php");
 
-}
+} // if user_role isn't set and the user isn't admin, then redirect it to the main page.
 
 
 ?>

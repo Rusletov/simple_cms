@@ -26,10 +26,11 @@
 
                     while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
                         $cat_title = $row['cat_title'];
+                        $cat_id = $row['cat_id'];
 
                 ?>
 
-                <li><a href="#"><?= $cat_title ?></a></li>
+                <li><a href="category.php?category=<?= $cat_id; ?>"><?= $cat_title ?></a></li>
 
 
                 <?php
@@ -38,10 +39,19 @@
 
                 ?>
 
+                <?php
+
+                if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+
+                ?>
 
                     <li>
                         <a href="admin">Admin</a>
                     </li>
+
+                <?php
+                }
+                ?>
 
                     <?php 
 

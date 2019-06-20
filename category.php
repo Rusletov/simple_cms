@@ -18,7 +18,13 @@
                 $post_category_id = $_GET['category'];
             }
 
-                $query = "SELECT * FROM posts WHERE post_category_id = '{$post_category_id}'";
+            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") {
+                $query = "SELECT * FROM posts WHERE post_category_id = '{$post_category_id}' ORDER BY post_id DESC";
+            } else {
+                $query = "SELECT * FROM posts WHERE post_category_id = '{$post_category_id}' AND post_status = 'published' ORDER BY post_id DESC";
+            }
+
+
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                     while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
@@ -27,6 +33,7 @@
                         $post_author = $row['post_author'];
                         $post_date = $row['post_date'];
                         $post_image = $row['post_image'];
+                        $post_status = $row['post_status'];
                         $post_content = rtrim(substr($row['post_content'], 0, 250)) . '... ';
 
                 ?>
@@ -39,6 +46,13 @@
                 <!-- First Blog Post -->
                 <h2>
                     <a href="post.php?p_id=<?= $post_id; ?>"><?= $post_title ?></a>
+                    <?php
+                        if ($post_status == 'draft') {
+                    ?>
+                        <small>DRAFT</small>
+                    <?php 
+                        }
+                    ?>
                 </h2>
                 <p class="lead">
                     by <a href="index.php"><?= $post_author; ?></a>
@@ -48,7 +62,7 @@
                 <img class="img-responsive" src="images/<?= $post_image; ?>" alt="">
                 <hr>
                 <p><?= $post_content ?></p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="post.php?p_id=<?= $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 

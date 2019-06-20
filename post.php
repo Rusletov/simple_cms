@@ -4,6 +4,7 @@
     <!-- Navigation -->
 <?php include 'includes/navigation.php'; ?>
 
+
     <!-- Page Content -->
     <div class="container">
 
@@ -33,13 +34,16 @@
                         $post_date = $row['post_date'];
                         $post_image = $row['post_image'];
                         $post_content = $row['post_content'];
+                        $post_status= $row['post_status'];
+                        
+                        if (!isset($_SESSION['user_role']) && $post_status == 'draft') {
 
+                                header("Location: index.php");
+
+                        } // if user_role is not defined and post is draft, redirect to the main page.
+                
+             
                 ?>
-
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
 
                 <!-- First Blog Post -->
                 <h2>
@@ -59,6 +63,7 @@
 
 
                 <?php } ?> <!-- end while loop -->
+                        
 
 
 

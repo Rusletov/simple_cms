@@ -25,8 +25,13 @@ if (isset($_POST['create_post'])) {
 
 	confirmQuery($create_post_query);
 
-}
+	$the_post_id = mysqli_insert_id($connection); // returns the ide of the last generated record in the db.
+?>
 
+	<p class="bg-success">Post Created. <a href="<?= "../post.php?p_id={$the_post_id}" ?>">View Post</a> or <a href="posts.php">Edit more posts</a></p>
+<?php 
+
+}
 
  ?>
 
@@ -66,8 +71,8 @@ if (isset($_POST['create_post'])) {
 	</div>
 
 	<div class="form-group">
-		<label for="post_status">Post Status</label>
 		<select class="form-control" name="post_status" id="">
+			<option value="draft">Post Status</option>
             <option value="draft">Draft</option>
             <option value="published">Publish</option>
         </select>

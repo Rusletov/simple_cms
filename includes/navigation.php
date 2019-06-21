@@ -48,6 +48,17 @@
                     <li>
                         <a href="admin">Admin</a>
                     </li>
+                <?php
+                }
+                ?>
+
+                <?php
+                if (!isset($_SESSION['user_role'])) {
+                ?>
+
+                    <li>
+                        <a href="registration.php">Registration</a>
+                    </li>
 
                 <?php
                 }

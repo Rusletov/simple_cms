@@ -23,5 +23,11 @@ $(document).ready(function(){
 
     });
 
+//loading screen for admin.
+
+$('#load-screen').delay(400).fadeOut(300, function() {
+    $(this).remove();
+})
+
 });
 

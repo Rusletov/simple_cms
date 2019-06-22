@@ -51,7 +51,8 @@
 		$query .= "post_status = '{$post_status}', ";
 		$query .= "post_tags = '{$post_tags}', ";
 		$query .= "post_content = '{$post_content}', ";
-		$query .= "post_image = '{$post_image}' ";
+		$query .= "post_image = '{$post_image}', ";
+		$query .= "post_views_count = 0 ";
 		$query .= "WHERE post_id = {$the_post_id} ";
 
 		$update_post = mysqli_query($connection, $query);

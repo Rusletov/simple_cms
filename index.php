@@ -50,7 +50,7 @@
                     
                 </h2>
                 <p class="lead">
-                    by <a href="author_posts.php?author=<?= $post_author; ?>&p_id=<?= $post_id; ?>"><?= $post_author; ?></a>
+                    by <a href="author_posts.php?author=<?= $post_author; ?>"><?= $post_author; ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?= $post_date; ?></p>
                 <hr>

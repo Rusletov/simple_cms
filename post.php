@@ -12,7 +12,7 @@
 
             if (isset($_GET['p_id'])) {
                 $the_post_id = $_GET['p_id'];
-            }
+            
 
 
         ?>
@@ -50,7 +50,7 @@
                     <a href="#"><?= $post_title ?></a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php"><?= $post_author; ?></a>
+                    by <a href="author_posts.php?author=<?= $post_author; ?>"><?= $post_author; ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?= $post_date; ?></p>
                 <hr>
@@ -62,7 +62,14 @@
                 <hr>
 
 
-                <?php } ?> <!-- end while loop -->
+                <?php 
+                } 
+
+            } else {
+                header('Location: index.php'); // redirect if doesn't have post id.
+            }
+
+            ?> <!-- end while loop and if -->
                         
 
 
@@ -162,11 +169,6 @@
                 </div>
 
             <?php } ?>
-
-
-
-
-
 
 
 

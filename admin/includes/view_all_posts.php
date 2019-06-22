@@ -21,11 +21,29 @@ if (isset($_POST['checkBoxArray'])) {
                 $update_to_delete_status = mysqli_query($connection, $query);
                 confirmQuery($update_to_delete_status);
                 break;
+            case 'clone':
+                $query = "SELECT * FROM posts WHERE post_id = {$postValueId} ";
+                $select_post_query = mysqli_query($connection, $query);
+                if (!$select_post_query) {
+                    die("Query Failed! " . mysqli_error($connection));
+                }
+                $row = mysqli_fetch_array($select_post_query);
 
-            
-            default:
-                # code...
-                break;
+                $post_author = s($row['post_author']);
+                $post_title = s($row['post_title']);
+                $post_category_id = s($row['post_category_id']);
+                $post_status = s($row['post_status']);
+                $post_image = s($row['post_image']);
+                $post_tags = s($row['post_tags']);
+                $post_date = s($row['post_date']);
+                $post_content = s($row['post_content']);
+
+                $query = "INSERT INTO posts (post_author, post_title, post_category_id, post_status, post_image, post_tags, post_date, post_content) ";
+                $query .= "VALUES ('{$post_author}', '{$post_title}', {$post_category_id}, '{$post_status}', '{$post_image}', '{$post_tags}', now(), '{$post_content}') ";
+                $copy_query = mysqli_query($connection, $query);
+                if (!$copy_query) {
+                    die("Query failed! " . mysqli_error($connection));
+                }
         }
     }
 }
@@ -40,6 +58,7 @@ if (isset($_POST['checkBoxArray'])) {
             <option value="published">Publish</option>
             <option value="draft">Draft</option>
             <option value="delete">Delete</option>
+            <option value="clone">Clone</option>
         </select>
     </div>
 

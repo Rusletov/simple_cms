@@ -44,6 +44,16 @@ if (isset($_POST['edit_user'])) {
 
     // move_uploaded_file($post_image_temp, "../images/$post_image");
 
+    $query = "SELECT randSalt FROM users";
+    $select_randsalt_query = mysqli_query($connection, $query);
+    if (!$select_randsalt_query) {
+        die("Query failed! " . mysqli_error($connection));
+    }
+
+    $row = mysqli_fetch_array($select_randsalt_query);
+    $salt = $row['randSalt'];
+    $hashed_password = crypt($user_password, $salt);
+
 
         $query = "UPDATE users SET ";
         $query .= "user_firstname = '{$user_firstname}', ";
@@ -51,12 +61,11 @@ if (isset($_POST['edit_user'])) {
         $query .= "user_role = '{$user_role}', ";
         $query .= "username = '{$username}', ";
         $query .= "user_email = '{$user_email}', ";
-        $query .= "user_password = '{$user_password}' ";
-        $query .= "WHERE username = '{$username}' ";
+        $query .= "user_password = '{$hashed_password}' ";
+        $query .= "WHERE user_id = {$user_id} ";
 
         $edit_user_query = mysqli_query($connection, $query);
         confirmQuery($edit_user_query);
-
 
 }
 
@@ -82,7 +91,7 @@ if (isset($_POST['edit_user'])) {
                 </h1>
 
 
-<form action="" method="post" enctype="multipart/form-data"> <!-- enctype is in charge for sending diffrent types of form data -->
+<form action="profile.php" method="post" enctype="multipart/form-data"> <!-- enctype is in charge for sending diffrent types of form data -->
     
 
     <div class="form-group">

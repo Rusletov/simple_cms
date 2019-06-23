@@ -58,8 +58,10 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?= $post_date; ?></p>
                 <hr>
-                <img class="img-responsive" src="images/<?= $post_image; ?>" alt="">
+                <?php if ($post_image): ?>
+                    <img class="img-responsive" src="images/<?= $post_image; ?>" alt="">
                 <hr>
+                <?php endif ?>
                 <p><?= $post_content ?></p>
                 
 

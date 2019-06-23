@@ -53,4 +53,4 @@ if (!isset($_SESSION['user_role']) && $_SESSION['user_role'] != 'admin') {
 </head>
 
 <body>
-    <div id='load-screen'><div id='loading'></div></div>
+    <div id='load-screen'><div id='loading'></div></div> <!-- Loading admin screen -->

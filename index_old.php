@@ -12,41 +12,12 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
-            <?php  
-            $per_page = 3;
-
-            if (isset($_GET['page'])) {
-                $page = $_GET['page'];
-            } else {
-                $page = "";
-            }
-
-            if ($page == "" || $page == 1) {
-                $offset = 0;
-            } else {
-                $offset = ($page * $per_page) - $per_page;
-            }
-
-            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") {
-                $post_query_count = "SELECT * FROM posts";
-            } else {
-                $post_query_count = "SELECT * FROM posts WHERE post_status = 'published'";
-            }
-            
-
-            $find_count = mysqli_query($connection, $post_query_count);
-            $count = mysqli_num_rows($find_count);
-
-            $count = ceil($count / $per_page);
-
-            ?>
-
             <?php 
 
                 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") {
-                    $query = "SELECT * FROM posts ORDER BY post_id DESC LIMIT $offset, $per_page";
+                    $query = "SELECT * FROM posts ORDER BY post_id DESC";
                 } else {
-                    $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC LIMIT $offset, $per_page";
+                    $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_id DESC";
                 }
 
                 
@@ -105,18 +76,5 @@
         <!-- /.row -->
 
         <hr>
-
-
-        <ul class="pager">
-            </li>
-            <?php 
-            for ($i = 1; $i <= $count; $i++) {
-
-             ?>
-             <li><a href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-            <?php 
-            }
-             ?>
-        </ul>
 
 <?php include 'includes/footer.php'; ?>

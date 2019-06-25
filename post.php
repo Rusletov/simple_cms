@@ -86,10 +86,10 @@
 
     if (isset($_POST['create_comment'])) {
 
-        $the_post_id = $_GET['p_id'];
-        $comment_author = $_POST['comment_author'];
-        $comment_email = $_POST['comment_email'];
-        $comment_content = $_POST['comment_content'];
+        $the_post_id = s($_GET['p_id']);
+        $comment_author = s($_POST['comment_author']);
+        $comment_email = s($_POST['comment_email']);
+        $comment_content = s($_POST['comment_content']);
 
 
         if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {

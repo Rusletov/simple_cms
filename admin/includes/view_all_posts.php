@@ -151,7 +151,7 @@ if (isset($_POST['checkBoxArray'])) {
 <?php 
 
     if (isset($_GET['delete'])) {
-        $the_post_id = $_GET['delete'];
+        $the_post_id = s($_GET['delete']);
         $query = "DELETE FROM posts WHERE post_id = '{$the_post_id}'";
         $delete_query = mysqli_query($connection, $query);
         confirmQuery($delete_query);
@@ -159,7 +159,7 @@ if (isset($_POST['checkBoxArray'])) {
     }
 
     if (isset($_GET['reset'])) {
-        $the_post_id = $_GET['reset'];
+        $the_post_id = s($_GET['reset']);
         $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = '{$the_post_id}'";
         $reset_query = mysqli_query($connection, $query);
         confirmQuery($reset_query);

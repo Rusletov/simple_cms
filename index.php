@@ -18,7 +18,7 @@
             if (isset($_GET['page'])) {
                 $page = $_GET['page'];
             } else {
-                $page = "";
+                $page = 1;
             }
 
             if ($page == "" || $page == 1) {
@@ -26,6 +26,7 @@
             } else {
                 $offset = ($page * $per_page) - $per_page;
             }
+
 
             if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") {
                 $post_query_count = "SELECT * FROM posts";
@@ -35,9 +36,9 @@
             
 
             $find_count = mysqli_query($connection, $post_query_count);
-            $count = mysqli_num_rows($find_count); // the number of records in the table.
+            $num_posts = mysqli_num_rows($find_count); // the number of records in the table.
 
-            echo $count = ceil($count / $per_page); // the number of buttons.
+            $pages_count = ceil($num_posts / $per_page); // the number of pages.
 
             ?>
 
@@ -61,8 +62,6 @@
                         $post_content = rtrim(substr($row['post_content'], 0, 250)) . '... ';
                         $post_status = $row['post_status'];
                         
-
-
 
                 ?>
 
@@ -108,20 +107,57 @@
 
 
         <ul class="pager">
-            </li>
-            <?php 
-            for ($i = 1; $i <= $count; $i++) {
+    <?php if ($page != 1) { // if the current page is greater than the first, output the links First and Previous ?>
+        <li><a href="index.php?page=1">First</a></li>
+        <li><a href="index.php?page=<?= $page - 1; ?>">Previous</a></li>
+    <?php } ?>
 
-                if ($i == $page) {
-            ?>
-                <li><a class="active_link" href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-            <?php
-                } else {
-             ?>
-             <li><a href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-            <?php 
-            } }
-             ?>
-        </ul>
+    <?php  
+    if ($page >= 3) {
+    ?>
+    <!-- output previous 2 pages links, if the current page is greater or equal to the third page -->
+    <li><a href="index.php?page=<?= $page - 2; ?>"><?= $page -2; ?></a></li>
+    <li><a href="index.php?page=<?= $page - 1; ?>"><?= $page -1; ?></a></li>
+    <?php
+    } else if ($page >= 2) {
+    ?>
+    <!-- output previous 1 page link, if the current is one greater than the first page -->
+    <li><a href="index.php?page=<?= $page - 1; ?>"><?= $page -1; ?></a></li>
+    <?php
+    }
+    ?>
+
+    <!-- output the current page link -->
+    <li><a class="active_link" href="index.php?page=<?= $page; ?>"><?= $page; ?></a></li>
+    <!-- output the following 2 pages -->
+
+    <?php  
+    if ($page <= $pages_count - 2) {
+    ?>
+    <!-- next 2 pages -->
+    <li><a href="index.php?page=<?= $page + 1; ?>"><?= $page + 1; ?></a></li>
+    <li><a href="index.php?page=<?= $page + 2; ?>"><?= $page + 2; ?></a></li>
+    <?php
+    }
+    /// output the following 1 link, if the current page is 1 less than the last page
+    else if ($page <= $pages_count - 1) {
+    ?>
+    <!-- next 1 page -->
+    <li><a href="index.php?page=<?= $page + 1; ?>"><?= $page + 1; ?></a></li>
+    <?php
+    }
+    ?>
+
+    <?php if ($page != $pages_count) { // if a page is less than the last one, output the buttons First and Previous ?>
+        <li><a href="index.php?page=<?= $page + 1; ?>">Next</a></li>
+        <li><a href="index.php?page=<?= $pages_count; ?>">Last</a></li>
+        
+    <?php } ?>
+
+            
+
+
+
+    </ul>
 
 <?php include 'includes/footer.php'; ?>

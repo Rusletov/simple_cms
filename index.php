@@ -13,7 +13,7 @@
             <div class="col-md-8">
 
             <?php  
-            $per_page = 3;
+            $per_page = 3; // the number of posts per page.
 
             if (isset($_GET['page'])) {
                 $page = $_GET['page'];
@@ -35,9 +35,9 @@
             
 
             $find_count = mysqli_query($connection, $post_query_count);
-            $count = mysqli_num_rows($find_count);
+            $count = mysqli_num_rows($find_count); // the number of records in the table.
 
-            $count = ceil($count / $per_page);
+            echo $count = ceil($count / $per_page); // the number of buttons.
 
             ?>
 
@@ -112,10 +112,15 @@
             <?php 
             for ($i = 1; $i <= $count; $i++) {
 
+                if ($i == $page) {
+            ?>
+                <li><a class="active_link" href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+            <?php
+                } else {
              ?>
              <li><a href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
             <?php 
-            }
+            } }
              ?>
         </ul>
 

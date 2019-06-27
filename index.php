@@ -106,6 +106,7 @@
         <hr>
 
         <!-- .pagination -->
+        <?php if ($pages_count >= 2) { ?>
         <ul class="pager">
         <?php if ($page != 1) { // if the current page is greater than the first, output the links First and Previous ?>
             <li><a href="index.php?page=1">First</a></li>
@@ -155,6 +156,7 @@
         <?php } ?>
 
         </ul>
+        <?php } ?>
         <!-- /.pagination -->
 
 

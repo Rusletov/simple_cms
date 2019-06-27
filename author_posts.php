@@ -29,7 +29,12 @@
 
             <?php 
 
-                $query = "SELECT * FROM posts WHERE post_author = '{$the_post_author}'";
+                if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "admin") {
+                    $query = "SELECT * FROM posts WHERE post_author = '{$the_post_author}' ORDER BY post_id DESC";
+                } else {
+                    $query = "SELECT * FROM posts WHERE post_status = 'published' AND post_author = '{$the_post_author}' ORDER BY post_id DESC";
+                }
+
                 $select_all_posts_query = mysqli_query($connection, $query);
 
                     while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
@@ -40,19 +45,19 @@
                         $post_image = $row['post_image'];
                         $post_content = $row['post_content'];
                         $post_status= $row['post_status'];
-                        
-                        if (!isset($_SESSION['user_role']) && $post_status == 'draft') {
-
-                                header("Location: index.php");
-
-                        } // if user_role is not defined and post is draft, redirect to the main page.
                 
-             
                 ?>
 
                 <!-- Blog Post -->
                 <h2>
                     <a href="post.php?p_id=<?= $the_post_id; ?>"><?= $post_title ?></a>
+                    <?php
+                        if ($post_status == 'draft') {
+                    ?>
+                        <small>DRAFT</small>
+                    <?php 
+                        }
+                    ?>
                 </h2>
                 
                 <p><span class="glyphicon glyphicon-time"></span> <?= $post_date; ?></p>

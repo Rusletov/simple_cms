@@ -31,3 +31,14 @@ $('#load-screen').delay(400).fadeOut(300, function() {
 
 });
 
+function loadUsersOnline() {
+    $.get("functions.php?onlineusers=result", function(data){
+        $(".usersonline").text(data);
+    });
+}
+
+setInterval(function() {
+    loadUsersOnline();
+}, 500);
+
+
